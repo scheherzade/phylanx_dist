@@ -26,3 +26,233 @@ input 10x1000x3 filter 50x10x3
 /home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=10 --hpx:localities=4
 input 10x1000x3 filter 50x50x3
 /home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=50 --hpx:localities=4
+input 10x1000x3 filter 50x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=100 --hpx:localities=4
+input 100x10x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=4
+input 100x10x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=4
+input 100x10x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=4
+input 100x100x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=4
+input 100x100x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=4
+input 100x100x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=4
+input 100x100x3 filter 50x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=10 --hpx:localities=4
+input 100x100x3 filter 50x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=50 --hpx:localities=4
+input 100x100x3 filter 50x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=100 --hpx:localities=4
+input 100x1000x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=4
+input 100x1000x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=4
+input 100x1000x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=4
+input 100x1000x3 filter 50x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=10 --hpx:localities=4
+input 100x1000x3 filter 50x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=50 --hpx:localities=4
+input 100x1000x3 filter 50x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=100 --hpx:localities=4
+input 1000x10x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=4
+input 1000x10x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=4
+input 1000x10x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=4
+input 1000x100x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=4
+input 1000x100x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=4
+input 1000x100x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=4
+input 1000x100x3 filter 50x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=10 --hpx:localities=4
+input 1000x100x3 filter 50x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=50 --hpx:localities=4
+input 1000x100x3 filter 50x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=100 --hpx:localities=4
+input 1000x1000x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=4
+input 1000x1000x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=4
+input 1000x1000x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=4
+input 1000x1000x3 filter 50x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=10 --hpx:localities=4
+input 1000x1000x3 filter 50x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=50 --hpx:localities=4
+input 1000x1000x3 filter 50x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=100 --hpx:localities=4
+input 10000x10x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=4
+input 10000x10x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=4
+input 10000x10x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=4
+input 10000x100x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=4
+input 10000x100x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=4
+input 10000x100x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=4
+input 10000x100x3 filter 50x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=10 --hpx:localities=4
+input 10000x100x3 filter 50x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=50 --hpx:localities=4
+input 10000x100x3 filter 50x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=100 --hpx:localities=4
+input 10000x1000x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=4
+input 10000x1000x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=4
+input 10000x1000x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=4
+tcmalloc: large alloc 1982005248 bytes == 0xad52000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0xac98000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0xcc1a000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0xc6a0000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0x80f9e000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0x82e6e000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0x80ef0000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0x828f8000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0x6400000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0x736e000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0x6d6c000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0x6592000 @ 
+input 10000x1000x3 filter 50x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=10 --hpx:localities=4
+input 10000x1000x3 filter 50x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=50 --hpx:localities=4
+input 10000x1000x3 filter 50x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=100 --hpx:localities=4
+tcmalloc: large alloc 1902002176 bytes == 0xb630000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0xc9c6000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0xafc4000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0xc4b4000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0x7cc36000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0x7dfca000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0x7c69a000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0x7db92000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0x795c000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0x7c0a000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0x7c24000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0x7f52000 @ 
+input 100000x10x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100000 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=4
+input 100000x10x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100000 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=4
+input 100000x10x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100000 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=4
+input 100000x100x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100000 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=4
+input 100000x100x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100000 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=4
+input 100000x100x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100000 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=4
+tcmalloc: large alloc 1820000256 bytes == 0xb9ee000 @ 
+tcmalloc: large alloc 1820000256 bytes == 0xc6f2000 @ 
+tcmalloc: large alloc 1820000256 bytes == 0xc040000 @ 
+tcmalloc: large alloc 1820000256 bytes == 0xb576000 @ 
+tcmalloc: large alloc 1820000256 bytes == 0x78804000 @ 
+tcmalloc: large alloc 1820000256 bytes == 0x781b4000 @ 
+tcmalloc: large alloc 1820000256 bytes == 0x78eb0000 @ 
+tcmalloc: large alloc 1820000256 bytes == 0x77d36000 @ 
+tcmalloc: large alloc 1820000256 bytes == 0x634a000 @ 
+tcmalloc: large alloc 1820000256 bytes == 0x6e2a000 @ 
+tcmalloc: large alloc 1820000256 bytes == 0x649c000 @ 
+tcmalloc: large alloc 1820000256 bytes == 0x68d6000 @ 
+input 100000x100x3 filter 50x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100000 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=10 --hpx:localities=4
+input 100000x100x3 filter 50x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100000 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=50 --hpx:localities=4
+input 100000x100x3 filter 50x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100000 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=100 --hpx:localities=4
+input 100000x1000x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100000 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=4
+tcmalloc: large alloc 1982005248 bytes == 0x61564000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0x62156000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0x61308000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0x61644000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0xd77a4000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0xd7886000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0xd8396000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0xd7552000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0x32f06000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0x31e34000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0x3209a000 @ 
+tcmalloc: large alloc 1982005248 bytes == 0x327c8000 @ 
+input 100000x1000x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100000 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=4
+tcmalloc: large alloc 9910001664 bytes == 0x62630000 @ 
+tcmalloc: large alloc 9910001664 bytes == 0x60fc2000 @ 
+tcmalloc: large alloc 9910001664 bytes == 0x61f10000 @ 
+tcmalloc: large alloc 9910001664 bytes == 0x6248e000 @ 
+tcmalloc: large alloc 9910001664 bytes == 0x2b1956000 @ 
+tcmalloc: large alloc 9910001664 bytes == 0x2b120c000 @ 
+tcmalloc: large alloc 9910001664 bytes == 0x2b02e8000 @ 
+tcmalloc: large alloc 9910001664 bytes == 0x2b17aa000 @ 
+tcmalloc: large alloc 9910001664 bytes == 0x310c6000 @ 
+tcmalloc: large alloc 9910001664 bytes == 0x31d32000 @ 
+tcmalloc: large alloc 9910001664 bytes == 0x3167c000 @ 
+tcmalloc: large alloc 9910001664 bytes == 0x3177a000 @ 
+input 100000x1000x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100000 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=4
+tcmalloc: large alloc 19820003328 bytes == 0x61e96000 @ 
+tcmalloc: large alloc 19820003328 bytes == 0x62888000 @ 
+tcmalloc: large alloc 19820003328 bytes == 0x611be000 @ 
+tcmalloc: large alloc 19820003328 bytes == 0x60ef6000 @ 
+tcmalloc: large alloc 19820003328 bytes == 0x500e6a000 @ 
+tcmalloc: large alloc 19820003328 bytes == 0x5004a4000 @ 
+tcmalloc: large alloc 19820003328 bytes == 0x4ff7c4000 @ 
+tcmalloc: large alloc 19820003328 bytes == 0x4ff4e0000 @ 
+tcmalloc: large alloc 19820003328 bytes == 0x32acc000 @ 
+tcmalloc: large alloc 19820003328 bytes == 0x31554000 @ 
+tcmalloc: large alloc 19820003328 bytes == 0x31a7e000 @ 
+tcmalloc: large alloc 19820003328 bytes == 0x322cc000 @ 
+input 100000x1000x3 filter 50x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100000 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=10 --hpx:localities=4
+tcmalloc: large alloc 1902002176 bytes == 0x62044000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0x60c3e000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0x619b0000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0x61e66000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0xd222e000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0xd363a000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0xd3458000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0xd2f9c000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0x319b0000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0x3160a000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0x322b2000 @ 
+tcmalloc: large alloc 1902002176 bytes == 0x31e6e000 @ 
+input 100000x1000x3 filter 50x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100000 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=50 --hpx:localities=4
+tcmalloc: large alloc 9510002688 bytes == 0x61fd2000 @ 
+tcmalloc: large alloc 9510002688 bytes == 0x61704000 @ 
+tcmalloc: large alloc 9510002688 bytes == 0x62788000 @ 
+tcmalloc: large alloc 9510002688 bytes == 0x61180000 @ 
+tcmalloc: large alloc 9510002688 bytes == 0x299d10000 @ 
+tcmalloc: large alloc 9510002688 bytes == 0x2986fa000 @ 
+tcmalloc: large alloc 9510002688 bytes == 0x29956a000 @ 
+tcmalloc: large alloc 9510002688 bytes == 0x298c9c000 @ 
+tcmalloc: large alloc 9510002688 bytes == 0x32274000 @ 
+tcmalloc: large alloc 9510002688 bytes == 0x329b4000 @ 
+tcmalloc: large alloc 9510002688 bytes == 0x32a28000 @ 
+tcmalloc: large alloc 9510002688 bytes == 0x32284000 @ 
+input 100000x1000x3 filter 50x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100000 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=100 --hpx:localities=4
+tcmalloc: large alloc 19020005376 bytes == 0x61b8c000 @ 
+tcmalloc: large alloc 19020005376 bytes == 0x61f78000 @ 
+tcmalloc: large alloc 19020005376 bytes == 0x612de000 @ 
+tcmalloc: large alloc 19020005376 bytes == 0x60ccc000 @ 
+tcmalloc: large alloc 19020005376 bytes == 0x4d0680000 @ 
+tcmalloc: large alloc 19020005376 bytes == 0x4cfeb0000 @ 
+tcmalloc: large alloc 19020005376 bytes == 0x4d0b58000 @ 
+tcmalloc: large alloc 19020005376 bytes == 0x4cf8a8000 @ 
+tcmalloc: large alloc 19020005376 bytes == 0x326fa000 @ 
+tcmalloc: large alloc 19020005376 bytes == 0x3174a000 @ 
+tcmalloc: large alloc 19020005376 bytes == 0x32e9c000 @ 
+tcmalloc: large alloc 19020005376 bytes == 0x31be4000 @ 
