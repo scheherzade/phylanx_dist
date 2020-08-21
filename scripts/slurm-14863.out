@@ -1,0 +1,112 @@
+input 10x10x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=1
+input 10x10x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=1
+input 10x10x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=1
+input 10x100x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=1
+input 10x100x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=1
+input 10x100x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=1
+input 10x100x3 filter 50x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=10 --hpx:localities=1
+input 10x100x3 filter 50x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=50 --hpx:localities=1
+input 10x100x3 filter 50x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=100 --hpx:localities=1
+input 10x1000x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=1
+input 10x1000x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=1
+input 10x1000x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=1
+input 10x1000x3 filter 50x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=10 --hpx:localities=1
+input 10x1000x3 filter 50x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=50 --hpx:localities=1
+input 10x1000x3 filter 50x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=100 --hpx:localities=1
+input 100x10x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=1
+input 100x10x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=1
+input 100x10x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=1
+input 100x100x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=1
+input 100x100x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=1
+input 100x100x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=1
+input 100x100x3 filter 50x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=10 --hpx:localities=1
+input 100x100x3 filter 50x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=50 --hpx:localities=1
+input 100x100x3 filter 50x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=100 --hpx:localities=1
+input 100x1000x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=1
+input 100x1000x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=1
+input 100x1000x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=1
+input 100x1000x3 filter 50x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=10 --hpx:localities=1
+input 100x1000x3 filter 50x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=50 --hpx:localities=1
+input 100x1000x3 filter 50x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=100 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=100 --hpx:localities=1
+input 1000x10x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=1
+input 1000x10x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=1
+input 1000x10x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=1
+input 1000x100x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=1
+input 1000x100x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=1
+input 1000x100x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=1
+input 1000x100x3 filter 50x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=10 --hpx:localities=1
+input 1000x100x3 filter 50x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=50 --hpx:localities=1
+input 1000x100x3 filter 50x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=100 --hpx:localities=1
+input 1000x1000x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=1
+input 1000x1000x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=1
+input 1000x1000x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=1
+input 1000x1000x3 filter 50x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=10 --hpx:localities=1
+input 1000x1000x3 filter 50x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=50 --hpx:localities=1
+input 1000x1000x3 filter 50x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=1000 --length=1000 --channel=3 --k_length=50 --k_channel=3 --k_out=100 --hpx:localities=1
+input 10000x10x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=1
+input 10000x10x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=1
+input 10000x10x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=10 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=1
+input 10000x100x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=1
+input 10000x100x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=1
+input 10000x100x3 filter 10x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=100 --channel=3 --k_length=10 --k_channel=3 --k_out=100 --hpx:localities=1
+input 10000x100x3 filter 50x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=10 --hpx:localities=1
+input 10000x100x3 filter 50x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=50 --hpx:localities=1
+input 10000x100x3 filter 50x100x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=100 --channel=3 --k_length=50 --k_channel=3 --k_out=100 --hpx:localities=1
+input 10000x1000x3 filter 10x10x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=10 --hpx:localities=1
+input 10000x1000x3 filter 10x50x3
+/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin/test_conv1d_instrumented_test --batch=10000 --length=1000 --channel=3 --k_length=10 --k_channel=3 --k_out=50 --hpx:localities=1
