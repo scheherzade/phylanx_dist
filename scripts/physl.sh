@@ -4,10 +4,10 @@ result_dir="/work/sshirzad/phylanx_dist/results"
 hpx_bin_dir="~/src/phylanx/build_release_clang_no_hpxmp_medusa/bin"
 node_name=$1
 num_nodes=$2
-input1=(100000)
-input2=(2000)
-filter1=(100)
-filter2=(1000)
+input1=(10 100 1000 10000 100000)
+input2=(10 100 1000)
+filter1=(10 50)
+filter2=(10 50 100)
 export PATH=${hpx_bin_dir}:$PATH
 
 #rm  ${result_dir}/*.dat
