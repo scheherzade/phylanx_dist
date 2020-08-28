@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH -N 8 
+#SBATCH -N 6 
 #SBATCH -p medusa
 #SBATCH --time=72:00:00
 
@@ -28,10 +28,17 @@ fi
 script_dir="/work/sshirzad/phylanx_dist/scripts"
 result_dir="/work/sshirzad/phylanx_dist/results"
 phylanx_bin_dir="/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin"
-input1=(10 100 1000 10000 100000)
-input2=(10 100 1000)
-filter1=(10 50)
-filter2=(10 50 100)
+#input1=(10 100 1000 10000 100000 50 500 5000 50000)
+#input1=(50 500 5000 50000)
+input1=(100000)
+#input2=(10 100 1000 50 500 5000 50000)
+input2=(500)
+filter1=(10)
+#filter1=(10 50 5 100 500)
+#filter2=(10 50 100)
+#filter2=(1 2 5 20 10 50 100)
+filter2=(5)
+
 export PATH=${phylanx_bin_dir}:$PATH
 
 #rm  ${result_dir}/*.dat

@@ -25,7 +25,7 @@ import torch.nn as nn
 import torch
 import time
 
-#torch.set_num_threads(1)
+#torch.set_num_threads(40)
 
 array = torch.rand(batch, 3, length)
 conv1 = nn.Conv1d(in_channels=3,out_channels=out_channels, kernel_size=kernel_size, bias=False)

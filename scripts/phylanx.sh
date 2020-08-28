@@ -11,6 +11,7 @@ script_dir="/work/sshirzad/phylanx_dist/scripts"
 filename=${script_dir}/cpp_physl.sh
 
 num_nodes=(1 2 4 8)
+#num_nodes=(6)
 
 curr_node=$(sed -n 4' p' ${filename} |cut -d' ' -f3)
 sed -i 4's/ '${curr_node}'/ '${node_name}'/' ${filename} 
