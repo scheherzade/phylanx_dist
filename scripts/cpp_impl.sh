@@ -24,7 +24,7 @@ for b in ${batch[@]}
 do
 	for l in ${length[@]}
 	do
-		for fl in ${filter_length}
+		for fl in ${filter_length[@]}
 		do
 			if [ $l -ge $fl ]
 			then
