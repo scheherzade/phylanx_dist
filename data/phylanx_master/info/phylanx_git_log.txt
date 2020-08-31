@@ -1,0 +1,350 @@
+commit 68bbd6993860ca536d45c0076e1eee15c2123421
+Author: Shahrzad Shirzad <shahrzadshirzad@gmail.com>
+Date:   Wed Aug 26 00:03:10 2020 -0500
+
+    Renaming distrubuted conv1d test files
+
+commit 9f0b8f1e17c4bc82776d5e84721cd924baf6ba3d
+Author: Shahrzad Shirzad <shahrzadshirzad@gmail.com>
+Date:   Thu Aug 20 10:37:42 2020 -0500
+
+    Allowing dist_conv1d test to run on 1 node
+
+commit d69f1592285aa77e72c48c6157d93642aae34038
+Author: Shahrzad Shirzad <shahrzadshirzad@gmail.com>
+Date:   Thu Aug 20 10:37:02 2020 -0500
+
+    Adding physl test distributed for conv1d
+
+commit 482a5c4cb9769cf53c87fc87d5b74d3d99a455c0
+Author: Shahrzad Shirzad <shahrzadshirzad@gmail.com>
+Date:   Thu Aug 20 10:36:09 2020 -0500
+
+    Adding instrumented dist_conv1d test
+
+commit 68163ca5ff12356e3db623111a63fadbc6423235
+Author: Bita Hasheminezhad <bita.hn90@gmail.com>
+Date:   Mon Aug 17 22:04:11 2020 -0500
+
+    Use for_loop on the batch dimension
+
+commit 5cfec384ff57287b21c14e1d510efe2e4ede4c84
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Thu Aug 13 13:14:38 2020 -0500
+
+    Converting all conv1d variations to use hpx::parallel:for_loop
+
+commit a7329360543d594839387ddbbc19e52258ca4888
+Merge: 23f755b6 1dff9228
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Sat Aug 15 09:59:51 2020 -0500
+
+    Merge pull request #1176 from ct-clmsn/lda_basic
+    
+    Lda basic
+
+commit 23f755b6e56e3840e080c6e9f431fecea4cb8ed4
+Merge: 5ffe9037 019fc002
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Sat Aug 15 09:59:28 2020 -0500
+
+    Merge pull request #1229 from STEllAR-GROUP/als_fix
+    
+    Start time counter in non-distributed ALS python version after reading input and slicing
+
+commit 1dff92284a7b08db0a02a00036daf6f5da979d0f
+Author: ct.clmsn <ct.clmsn@gmail.com>
+Date:   Thu Aug 13 10:39:47 2020 -0400
+
+    fixes for ci inspect and flake8
+
+commit 5ffe9037aa68ad64678cd513f54513d7c2503226
+Merge: e34bd48f cb12bb02
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Thu Aug 13 05:46:30 2020 -0500
+
+    Merge pull request #1231 from STEllAR-GROUP/nullvalue
+    
+    Allow a null values to be assigned to a dict, e.g. d["k"] = None
+
+commit cb12bb02c4b9a2bacb14204a6c4e3445189812af
+Author: Steven R. Brandt <sbrandt@cct.lsu.edu>
+Date:   Wed Aug 12 20:34:53 2020 +0000
+
+    Fix formatting issue.
+
+commit fdab2efa5a1ee31a49d4514b2d98f0d4371fd395
+Merge: 9ebbca47 e34bd48f
+Author: ct.clmsn <ct.clmsn@gmail.com>
+Date:   Wed Aug 12 13:33:31 2020 -0400
+
+    Merge branch 'master' of https://github.com/STEllAR-GROUP/phylanx into lda_basic
+
+commit 9f117fd01d6543a22a04e6c41905541ce1b067a1
+Author: Steven R. Brandt <sbrandt@cct.lsu.edu>
+Date:   Wed Aug 12 16:38:31 2020 +0000
+
+    Instead of not checking for valid, check for nil explicitly.
+
+commit d89dc1dfc9fd3fb6711a63910c4f0bcb10dafc60
+Author: Steven R. Brandt <sbrandt@cct.lsu.edu>
+Date:   Wed Aug 12 16:17:26 2020 +0000
+
+    Allow a null values to be assigned to a dict, e.g. d["k"] = None
+
+commit e34bd48fd8599fc224faab244bd5eba6e89326ef
+Merge: 819b584e 43796000
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Tue Aug 11 16:59:51 2020 -0500
+
+    Merge pull request #1227 from STEllAR-GROUP/fixing_1225
+    
+    Adding support for dictionaries to for_each
+
+commit 019fc0029d268e8522787da0fd074154aeda6f65
+Author: NanmiaoWu <nanmiaowu@gmail.com>
+Date:   Tue Aug 11 15:36:41 2020 -0500
+
+    Update als.py
+    
+    Add seed(0), so could reproduce same result on python.
+
+commit da10c9da35005030baab858c09e9bc95c4f6fbfc
+Author: nanmiao <nanmiaowu@gmail.com>
+Date:   Sun Aug 9 12:45:43 2020 -0500
+
+    start time counter in python version after reading input and slicing input
+
+commit 437960004d1e587ff5e895fb27b7a3a86e887239
+Merge: 4bbbac2a 819b584e
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Sun Aug 9 09:08:28 2020 -0500
+
+    Merge branch 'master' into fixing_1225
+
+commit 819b584e5485330472a8a93ff78f26ed5bad0fa8
+Merge: 905f922a c27d08d1
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Sun Aug 9 09:07:35 2020 -0500
+
+    Merge pull request #1226 from STEllAR-GROUP/fixing_1224
+    
+    Adding support for len() on dictionaries
+
+commit 4bbbac2a859c40b43d56230dc9626a0a683d9200
+Author: Steven R. Brandt <sbrandt@cct.lsu.edu>
+Date:   Fri Aug 7 20:07:56 2020 +0000
+
+    Fix the test
+
+commit c27d08d1f9ed2d897758275c9c3a01123f429243
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Thu Aug 6 11:41:15 2020 -0500
+
+    Adding support for len() on dictionaries
+    
+    - unified implementation for len_operation()
+
+commit 94f4cd12636b4064f97edcae2498db3d86777908
+Author: Steven R. Brandt <sbrandt@cct.lsu.edu>
+Date:   Fri Aug 7 20:04:51 2020 +0000
+
+    Modify this PR so that it behaves the same way as Python.
+
+commit 9af74e28b87deaac2023d688e6147dd74a329032
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Thu Aug 6 12:34:27 2020 -0500
+
+    Adding support for dictionaries to for_each
+
+commit 905f922a69dbbb7e2352ef5017f87072fd17383e
+Merge: 9883997e 25f6d040
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Wed Aug 5 12:02:32 2020 -0500
+
+    Merge pull request #1223 from STEllAR-GROUP/als_distributed_working
+    
+    add distributed als
+
+commit 25f6d0401ad331fef11b77b09c3392f78826ce17
+Author: nanmiao <nanmiaowu@gmail.com>
+Date:   Tue Aug 4 18:49:22 2020 -0500
+
+    revise als python version: add command line argument passing; add time measurement; can test with data_csv
+
+commit 08a4e871dcdaa10bad21d0dc82acd111d4d4cbbb
+Author: nanmiao <nanmiaowu@gmail.com>
+Date:   Mon Aug 3 15:00:07 2020 -0500
+
+    add a dataset 718x15000
+
+commit 9883997ef46d537d8ee3bb11113f20d7d1a09a87
+Merge: cf54adc6 4fe6f6fa
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Mon Aug 3 13:04:30 2020 -0500
+
+    Merge pull request #1219 from STEllAR-GROUP/rtohid/constant_node
+    
+    Frontend: Support `ast.Constant` (python 3.6+).
+
+commit cf54adc6cfd77039bb8daf64028737e59b6a6a44
+Merge: 71be918a 6cf0afdc
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Mon Aug 3 13:04:09 2020 -0500
+
+    Merge pull request #1195 from STEllAR-GROUP/statistics_d
+    
+    Factoring out common statistics code
+
+commit 71be918a5e2c1926527c85342c93511170fbecc2
+Merge: 0984754a 85e8b16c
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Mon Aug 3 13:03:26 2020 -0500
+
+    Merge pull request #1222 from STEllAR-GROUP/physl_spmd
+    
+    Make sure physl interpreter works in spmd mode by default
+
+commit 4293cb2dc8e0ca434d4f2bb26ca1f42a4f70851d
+Author: nanmiao <nanmiaowu@gmail.com>
+Date:   Mon Aug 3 11:16:25 2020 -0500
+
+    add distributed als
+
+commit 85e8b16c61ae27d6b6bd33e29d28982578449ab8
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Fri Jul 31 12:44:20 2020 -0500
+
+    Make sure physl interpreter works in spmd mode by default
+    
+    - flyby: enable mult_cannond_d to run on one locality
+
+commit 0984754ac5672904a405f32e2a00cedea3b15f1a
+Merge: 5b68c67d 3c9f464c
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Thu Jul 30 12:09:16 2020 -0500
+
+    Merge pull request #1209 from STEllAR-GROUP/read_csv_d
+    
+    Adding distributed file_read_csv
+
+commit 5b68c67dff775430b3bceca22a4779fc432cd3cd
+Merge: 43850ec8 86d12df1
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Thu Jul 30 12:06:50 2020 -0500
+
+    Merge pull request #1215 from STEllAR-GROUP/dist_slice_local
+    
+    Add functions for slicing distributed arrays locally
+
+commit 86d12df1c7d248b399b3febc6e381838babd2314
+Author: nanmiao <nanmiaowu@gmail.com>
+Date:   Wed Jul 22 15:00:55 2020 -0500
+
+    remove slice_d
+
+commit cc292b906c510888afe94dea2914b364a622d37a
+Author: nanmiao <nanmiaowu@gmail.com>
+Date:   Wed Jul 22 14:50:22 2020 -0500
+
+    remove commented lines; remove non-used varibales;
+
+commit be7a93a4768081e660eea1afe61b4246c822c50e
+Author: nanmiao <nanmiaowu@gmail.com>
+Date:   Wed Jul 22 10:53:38 2020 -0500
+
+    revise code format error
+
+commit a8c23cfb4cad148486e348aa57ce5f48a7b0f31f
+Author: nanmiao <nanmiaowu@gmail.com>
+Date:   Tue Jul 21 20:59:54 2020 -0500
+
+    add slice1d_assign 2d for distributed array but index is locally
+
+commit b6d872ac394e14b99b49feb81a70bb9847352f68
+Author: nanmiao <nanmiaowu@gmail.com>
+Date:   Tue Jul 21 17:39:25 2020 -0500
+
+    test als for slicing; will need slice_assign
+
+commit 6b7b6c6d8195923f72d85e29e33424f4ab756fa6
+Author: nanmiao <nanmiaowu@gmail.com>
+Date:   Tue Jul 21 15:03:50 2020 -0500
+
+    add tests for slice works on distributed array but return locally
+
+commit 7231c430151e317aa6dff35a2e880f3195f26c17
+Author: nanmiao <nanmiaowu@gmail.com>
+Date:   Fri Jul 17 17:39:36 2020 -0500
+
+    diffentia three cases in slice; tests pass;
+
+commit 932b7a5121b8b98249b60ac2c848dde53f79329b
+Author: nanmiao <nanmiaowu@gmail.com>
+Date:   Fri Jul 17 15:11:42 2020 -0500
+
+    dist_slice with dist_mode
+
+commit 4729b0cf8605e1a63178b02ffd06cef16f4bef48
+Author: nanmiao <nanmiaowu@gmail.com>
+Date:   Fri Jul 17 13:03:06 2020 -0500
+
+    dist_slice work on distributed arrays (index works on the whole array); tests pass
+
+commit 1c1895a6099f21d7fe5adcb2a6bf8d6b1a1a5468
+Author: nanmiao <nanmiaowu@gmail.com>
+Date:   Thu Jul 16 16:50:15 2020 -0500
+
+    rename some slice_extract and slice_assgin to dist_ when they work on distributed arrays
+
+commit 4fe6f6fa62b712fefb4657cacf6087df6dfca083
+Author: rtohid <rtohid@users.noreply.github.com>
+Date:   Tue Jul 28 00:50:12 2020 -0500
+
+    Frontend: Fix #1218, the second attempt.
+
+commit 81109ea46481dc34aa86b4ecbcc11cbff28f72c0
+Author: rtohid <rtohid@users.noreply.github.com>
+Date:   Mon Jul 27 10:15:57 2020 -0500
+
+    Frontend: Support `ast.Constant` (python 3.6+).
+
+commit 43850ec86050ebaa341994e62ced3a7a39aa8ae7
+Merge: e1e56806 3a8e9ef5
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Tue Jul 28 07:35:45 2020 -0500
+
+    Merge pull request #1216 from STEllAR-GROUP/fixing_perfdata
+    
+    Generate perfdata on current locality only
+
+commit 3a8e9ef5c7a2ee1cafbf34b4c5bc5a0c1794af7e
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Thu Jul 23 14:24:27 2020 -0500
+
+    Generate perfdata on current locality only
+    
+    flyby: fixing #include path
+
+commit e1e5680635587d754c717aaa722671fadb07c07c
+Merge: d9bf0d4e 022a351b
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Wed Jul 22 10:43:41 2020 -0500
+
+    Merge pull request #1213 from STEllAR-GROUP/timer_primitive
+    
+    Adding timer() primitive
+
+commit 022a351ba587e86fff4b6ba4bd2acedc3868745e
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Sun Jul 19 12:22:31 2020 -0500
+
+    Fixing empty argument function invocation
+
+commit e7a26ebf3aa3b433aa271d83a0e4da38fb4926c5
+Author: Hartmut Kaiser <hartmut.kaiser@gmail.com>
+Date:   Fri Jul 17 17:51:56 2020 -0500
+
+    Adding timer() primitive
+    
+    - flyby: fixing #includes for HPX changes
