@@ -19,32 +19,50 @@ import glob
 import numpy as np
 import matplotlib.pyplot as plt
 
-def read_files(directory='/home/shahrzad/repos/phylanx_dist/all_results'):
-    data_files=glob.glob(directory+'/*.dat')
+def read_files(dirs, mode='config'):
+    data_files=[]
+    for directory in dirs:
+        [data_files.append(data_file) for data_file in glob.glob(directory+'/*.dat')]
+        
     configs=[]
     results={}
     
     for filename in data_files:
-        (node, run_type, batch, length, k_length, k_out, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')    
+        (node, run_type, batch, length, k_out, k_length, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')    
         num_nodes=int(num_nodes)
         f=open(filename, 'r')
         data=f.readlines()
         if len(data)>0:
             if run_type=='pytorch':
                 d_time=[float(data[0].replace('\n',''))]
-                d_size=data[1].split('[')[1].split('])\n')[0]
+                d_size=data[1].split('[')[1].split('])\n')[0].replace(' ','')
             else:
                 d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
                 if run_type=='physl' and len(data)>num_nodes:
-                    d_size=data[-1].split('(')[1].split(')\n')[0]
+                    d_size=data[-1].split('(')[1].split(')\n')[0].replace(' ','')
+                    (node, run_type, batch, length, k_length, k_out, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')                    
+                elif run_type=='impl' or run_type=='pytorch':
+                    d_size=data[-1].split('[')[1].split(']\n')[0].replace(' ','')
                 else:
                     d_size=""
-                            
+                           
+#            if mode == 'run_type':
+#                if node not in results.keys():
+#                    results[node]={}
+#                if num_nodes not in results[node].keys():
+#                    results[node][num_nodes]={}
+#                if run_type not in results[node][num_nodes].keys():
+#                    results[node][num_nodes][run_type]={}
+#                config=batch+'-'+length+'-'+k_out+'-'+k_length
+#                if config not in results[node][num_nodes][run_type][config].keys():
+#                    results[node][num_nodes][run_type][config]={'time':max(d_time), 'size':d_size}
+#                    configs.append(config)
+#            else:      
             if node not in results.keys():
                 results[node]={}
             if num_nodes not in results[node].keys():
                 results[node][num_nodes]={}
-            config=batch+'-'+length+'-'+k_length+'-'+k_out
+            config=batch+'-'+length+'-'+k_out+'-'+k_length
             if config not in results[node][num_nodes].keys():
                 results[node][num_nodes][config]={}
                 configs.append(config)
@@ -76,16 +94,16 @@ def plot_all(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
            
             plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
             plt.title("run on "+node+" on "+str(no)+" nodes")
-            plt.savefig(plot_dir+'/all_configs/'+node+'_'+str(no),bbox_inches='tight')
+            plt.savefig(plot_dir+'/all_configs/'+node+'_'+str(no)+'.png',bbox_inches='tight')
             plt.close()
             j=j+1
 
 
 #comparison of different runs different nodes   
-def plot_num_nodes(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
+def plot_num_nodes(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots',mode='speedup'):
     j=1
     for node in results.keys():    
-        run_types=['instrumented','pytorch']
+        run_types=['cpp','impl','pytorch']
         num_nodes=[k for k in results[node].keys()]
         num_nodes.sort()
         configs=[k for k in results[node][1].keys()]
@@ -93,14 +111,20 @@ def plot_num_nodes(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
         
         for config in configs:
             plt.figure(j)                 
-            for run_type in run_types:            
-                plt.scatter([k for k in num_nodes if k in results[node].keys() and config in results[node][k] and run_type in results[node][k][config] and run_type in results[node][1][config]], [results[node][1][config][run_type]['time']/results[node][k][config][run_type]['time'] for k in num_nodes if k in results[node].keys() and config in results[node][k] and run_type in results[node][k][config] and run_type in results[node][1][config]], marker='.', label=run_type)
+            for run_type in run_types:    
+                all_ks=[k for k in num_nodes if k in results[node].keys() and config in results[node][k] and run_type in results[node][k][config] and run_type in results[node][1][config]]
+                if mode=='speedup':
+                    plt.scatter(all_ks, [results[node][1][config][run_type]['time']/results[node][k][config][run_type]['time'] for k in all_ks], marker='.', label=run_type)
+                    plt.ylabel('speed-up')
+                else:
+                    plt.scatter(all_ks, [results[node][k][config][run_type]['time'] for k in all_ks], marker='.', label=run_type)
+                    plt.ylabel('time')
+
                           
             plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
             plt.title("run on "+node+" "+config)
             plt.xlabel('num_nodes')
-            plt.ylabel('speed-up')
-            plt.savefig(plot_dir+'/based_on_num_nodes/'+node+'_'+config,bbox_inches='tight')
+            plt.savefig(plot_dir+'/based_on_num_nodes/'+mode+'/'+node+'_'+config+'.png',bbox_inches='tight')
             plt.close()
             j=j+1
                 
@@ -108,9 +132,11 @@ def plot_num_nodes(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
 #effect of batch size   
 def plot_batch(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
     j=1
+    run_types=['cpp','impl','pytorch']
+
     for node in results.keys():    
-        run_types=['instrumented','pytorch']
         num_nodes=[k for k in results[node].keys()]
+        num_nodes=[1]
         configs=[k for k in results[node][1].keys()]
         num_nodes.sort()
         configs.sort()
@@ -125,14 +151,15 @@ def plot_batch(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
                     p1_batches=sorted(p1_batches, key=lambda x: int("".join([i for i in x if i.isdigit()])))
         
                     plt.figure(j)                 
-                    for run_type in run_types:            
-                        plt.scatter([p1.split('-')[0] for p1 in p1_batches if run_type in results[node][no][p1].keys()],[results[node][no][p1][run_type]['time'] for p1 in p1_batches if run_type in results[node][no][p1].keys()], marker='.', label=run_type)
-                                                    
-                    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                    for run_type in run_types: 
+                        p1s=[p1 for p1 in p1_batches if run_type in results[node][no][p1].keys()]
+                        if len(p1s)>0:
+                            plt.scatter([p1.split('-')[0] for p1 in p1s],[results[node][no][p1][run_type]['time'] for p1 in p1s], marker='.', label=run_type)                                                  
+                            plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
                     plt.title("run on "+node+" on "+str(no)+" nodes "+nbatch)
                     plt.xlabel('batch size')
                     plt.ylabel('time')
-                    plt.savefig(plot_dir+'/based_on_batches/'+node+'_'+str(no)+'_'+nbatch,bbox_inches='tight')
+                    plt.savefig(plot_dir+'/based_on_batches/'+node+'_'+str(no)+'_'+nbatch+'.png',bbox_inches='tight')
                     plt.close()
                     j=j+1
                 
@@ -164,7 +191,7 @@ def plot_length(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
                     plt.title("run on "+node+" on "+str(no)+" nodes "+nbatch)
                     plt.xlabel('length')
                     plt.ylabel('time')
-                    plt.savefig(plot_dir+'/based_on_length/'+node+'_'+str(no)+'_'+nbatch,bbox_inches='tight')
+                    plt.savefig(plot_dir+'/based_on_length/'+node+'_'+str(no)+'_'+nbatch+'.png',bbox_inches='tight')
                     plt.close()
                     j=j+1
                     
@@ -196,7 +223,7 @@ def plot_f_length(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
                     plt.xlabel('filter_length')
                     plt.ylabel('time')
                     plt.close()
-                    plt.savefig(plot_dir+'/based_on_filter_length/'+node+'_'+str(no)+'_'+nbatch,bbox_inches='tight')
+                    plt.savefig(plot_dir+'/based_on_filter_length/'+node+'_'+str(no)+'_'+nbatch+'.png',bbox_inches='tight')
         
                     j=j+1
                 
@@ -227,7 +254,7 @@ def plot_f_out(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
                     plt.title("run on "+node+" on "+str(no)+" nodes "+nbatch)
                     plt.xlabel('out_channel')
                     plt.ylabel('time')
-                    plt.savefig(plot_dir+'/based_on_out_channel/'+node+'_'+str(no)+'_'+nbatch,bbox_inches='tight')
+                    plt.savefig(plot_dir+'/based_on_out_channel/'+node+'_'+str(no)+'_'+nbatch+'.png',bbox_inches='tight')
                     plt.close()
                     j=j+1
                     
@@ -246,11 +273,13 @@ def read_one_node(directory='/home/shahrzad/repos/phylanx_dist/results_one_node'
         if len(data)>0:
             if run_type=='pytorch':
                 d_time=[float(data[0].replace('\n',''))]
-                d_size=data[1].split('[')[1].split('])\n')[0]
+                d_size=data[1].split('[')[1].split('])\n')[0].split(',')
             else:
                 d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
                 if run_type=='physl' and len(data)>num_nodes:
-                    d_size=data[-1].split('(')[1].split(')\n')[0]
+                    d_size=data[-1].split('(')[1].split(')\n')[0].split(',')
+                elif run_type=='impl' or run_type=='pytorch':
+                    d_size=data[-1].split('[')[1].split(']\n')[0].split(',')
                 else:
                     d_size=""
                             
@@ -268,10 +297,9 @@ def read_one_node(directory='/home/shahrzad/repos/phylanx_dist/results_one_node'
                 results[node][num_nodes][config][run_type][num_cores]={'time':max(d_time), 'size':d_size}
     return results
 
-def plot_one_node(results_one_node, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
+def plot_one_node_speedup(results_one_node, plot_dir='/home/shahrzad/repos/phylanx_dist/plots',run_types=['cpp','impl','pytorch']):
     j=1
     for node in results_one_node.keys():    
-        run_types=['instrumented','pytorch']
         num_nodes=[k for k in results_one_node[node].keys()]
         num_nodes.sort()
         configs=[k for k in results_one_node[node][1].keys()]
@@ -288,6 +316,42 @@ def plot_one_node(results_one_node, plot_dir='/home/shahrzad/repos/phylanx_dist/
             plt.title("run on "+node+" 1 node "+config)
             plt.xlabel('num_cores')
             plt.ylabel('speed-up')
-            plt.savefig(plot_dir+'/one_node/'+node+'_'+config,bbox_inches='tight')
+            plt.savefig(plot_dir+'/one_node/'+node+'_'+config+'_speedup.png',bbox_inches='tight')
             plt.close()
             j=j+1
+
+def plot_one_node_time(results_one_node, plot_dir='/home/shahrzad/repos/phylanx_dist/plots', run_types=['cpp','impl','pytorch']):
+    j=1
+    for node in results_one_node.keys():            
+        num_nodes=[k for k in results_one_node[node].keys()]
+        num_nodes.sort()
+        configs=[k for k in results_one_node[node][1].keys()]
+        configs.sort()
+        
+        for config in configs:
+            plt.figure(j)                 
+            for run_type in [run_type for run_type in run_types if run_type in results_one_node[node][1][config].keys()]:                   
+                num_cores=[k for k in results_one_node[node][1][config][run_type].keys() if config in results_one_node[node][1] and run_type in results_one_node[node][1][config]]
+                num_cores.sort()
+                plt.scatter(num_cores, [results_one_node[node][1][config][run_type][k]['time'] for k in num_cores], marker='.', label=run_type)
+                          
+            plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+            plt.title("run on "+node+" 1 node "+config)
+            plt.xlabel('num_cores')
+            plt.ylabel('time')
+            plt.savefig(plot_dir+'/one_node/'+node+'_'+config+'_time.png',bbox_inches='tight')
+            plt.close()
+            j=j+1
+
+
+def validate_output_size(results):
+    for node in results.keys():
+        for num_nodes in results[node].keys():
+            for config in results[node][num_nodes].keys():                
+                if 'impl' in results[node][num_nodes][config].keys() and 'pytorch' in results[node][num_nodes][config].keys():
+                    size_impl=results[node][num_nodes][config]['impl']['size']
+                    size_pytorch=results[node][num_nodes][config]['pytorch']['size']
+                    if size_impl != size_pytorch:
+                        print("error", config, node)
+                        print("impl", size_impl)
+                        print("pytorch", size_pytorch)
