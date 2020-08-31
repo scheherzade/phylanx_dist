@@ -19,20 +19,20 @@ filter_length=(5 10 100)
 
 #rm  ${result_dir}/*.dat
 
-for i1 in ${batch[@]}
+for b in ${batch[@]}
 do
-	for i2 in ${length[@]}
+	for l in ${length[@]}
 	do
-		for f1 in ${filter_length[@]}
+		for fl in ${filter_length[@]}
 		do
-			if [ $i2 -ge $f1 ]
+			if [ $l -ge $fl ]
 			then
-	        	        for f2 in ${out_channels[@]}
+	        	        for oc in ${out_channels[@]}
 	        	        do
-					echo "input ${i1}x${i2}x3 filter ${f1}x${f2}x3"
-					touch ${result_dir}/${node_name}_pytorch_${i1}_${i2}_${f1}_${f2}_${num_nodes}.dat
-					rm ${result_dir}/${node_name}_pytorch_${i1}_${i2}_${f1}_${f2}_${num_nodes}.dat
-                	                srun -p ${node_name} -N ${num_nodes}  python3 pytorch_run.py ${i1} ${i2} ${f1} ${f2} >>${result_dir}/${node_name}_pytorch_${i1}_${i2}_${f1}_${f2}_${num_nodes}.dat
+					echo "input ${b}x${l}x3 filter ${oc}x${fl}x3"
+					touch ${result_dir}/${node_name}_pytorch_${b}_${l}_${oc}_${fl}_${num_nodes}.dat
+					rm ${result_dir}/${node_name}_pytorch_${b}_${l}_${oc}_${fl}_${num_nodes}.dat
+                	                srun -p ${node_name} -N ${num_nodes}  python3 pytorch_run.py ${b} ${l} ${oc} ${fl} >>${result_dir}/${node_name}_pytorch_${b}_${l}_${oc}_${fl}_${num_nodes}.dat
 				done
 			fi
 		done

@@ -1,2 +1,2 @@
-0.14779186248779297
-output size: torch.Size([10, 5, 991])
+0.13242053985595703
+output size: torch.Size([10, 10, 996])

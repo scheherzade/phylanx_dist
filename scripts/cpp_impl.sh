@@ -26,7 +26,7 @@ do
 	do
 		for fl in ${filter_length}
 		do
-			if [ $b -ge $fl ]
+			if [ $l -ge $fl ]
 			then
 	        	        for oc in ${out_channels[@]}
 	        	        do

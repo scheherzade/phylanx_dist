@@ -16,8 +16,8 @@ args = parser.parse_args()
 
 batch = args.integers[0]
 length = args.integers[1]
-kernel_size = args.integers[2]
-out_channels = args.integers[3]
+kernel_size = args.integers[3]
+out_channels = args.integers[2]
 
 import torch.distributed as dist
 import torch.nn.parallel as par  
