@@ -17,7 +17,7 @@ rm ${reult_dir}/info/*
 cp ${hpx_build_dir}/info/* ${result_dir}/info/
 cp ${phylanx_build_dir}/info/* ${result_dir}/info/
 
-filename=${script_dir}/cpp_physl.sh
+filename=${script_dir}/cpp_impl.sh
 
 num_nodes=(1 2 4 6 8)
 #num_nodes=(6)

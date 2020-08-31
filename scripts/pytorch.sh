@@ -1,6 +1,7 @@
 #!/bin/bash
 node_name=$1
-num_nodes=(1 2 4 6 8)
+#num_nodes=(1 2 4 6 8)
+num_nodes=(1)
 
 result_dir="/work/sshirzad/phylanx_dist/results"
 script_dir="/work/sshirzad/phylanx_dist/scripts"
