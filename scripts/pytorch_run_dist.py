@@ -37,10 +37,9 @@ kernel_size = args.integers[2]
 out_channels = args.integers[3]
 num_cores = args.integers[4]
 
-ips=['10.242.35.37', '10.242.35.38']
 def setup(rank, world_size):
     os.environ["CUDA_VISIBLE_DEVICES"]=""
-    os.environ['MASTER_ADDR'] = ips[0]
+    os.environ['MASTER_ADDR'] = '10.242.35.38' 
     os.environ['MASTER_PORT'] = '12355'
     print("setup",rank,world_size)
     # initialize the process group

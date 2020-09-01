@@ -13,9 +13,9 @@ phylanx_bin_dir="/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/
 
 
 batch=(100000)
-length=(1000)
-out_channels=(10)
-filter_length=(100)
+length=(500)
+out_channels=(5)
+filter_length=(10)
 
 thr=(1 4 8 16 24 32 40)
 export PATH=${phylanx_bin_dir}:$PATH

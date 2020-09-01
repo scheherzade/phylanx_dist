@@ -13,9 +13,9 @@ result_dir="/work/sshirzad/phylanx_dist/results"
 
 
 batch=(100000)
-length=(1000)
+length=(500)
 out_channels=(10)
-filter_length=(100)
+filter_length=(5)
 
 thr=(1 4 8 16 24 32 40)
 export PATH=${phylanx_bin_dir}:$PATH
