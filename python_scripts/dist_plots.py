@@ -19,58 +19,48 @@ import glob
 import numpy as np
 import matplotlib.pyplot as plt
 
-def read_files(dirs, mode='config'):
-    data_files=[]
+def read_files(dirs):
+    ref_dir='/home/shahrzad/repos/phylanx_dist/data/'
+    data_files={}
     for directory in dirs:
-        [data_files.append(data_file) for data_file in glob.glob(directory+'/*.dat')]
+        data_files[directory]=[]
+        for filename in glob.glob(ref_dir+directory+'/*.dat'):
+            data_files[directory].append(filename)
         
     configs=[]
     results={}
     
-    for filename in data_files:
-        (node, run_type, batch, length, k_out, k_length, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')    
-        num_nodes=int(num_nodes)
-        f=open(filename, 'r')
-        data=f.readlines()
-        if len(data)>0:
-            if run_type=='pytorch':
-                d_time=[float(data[0].replace('\n',''))]
-                d_size=data[1].split('[')[1].split('])\n')[0].replace(' ','')
-            else:
-                d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
-                if run_type=='physl' and len(data)>num_nodes:
-                    d_size=data[-1].split('(')[1].split(')\n')[0].replace(' ','')
-                    (node, run_type, batch, length, k_length, k_out, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')                    
-                elif run_type=='impl':
-                    d_size=data[-1].split('[')[1].split(']\n')[0].replace(' ','')
-                elif run_type=='cpp':
-                    d_size=data[-1].split('(')[1].split(')\n')[0].replace(' ','')
-                    (node, run_type, batch, length, k_length, k_out, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')                                
-                else:
+    for directory in data_files.keys():
+        for filename in data_files[directory]:
+            (node, run_type, batch, length, k_out, k_length, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')    
+
+            f=open(filename, 'r')
+            data=f.readlines()
+            if len(data)>0:            
+                if run_type=='pytorch':
+                    d_time=[float(data[0].replace('\n',''))]
+                    d_size=data[-1].split('[')[1].split(']')[0].replace(' ','')
+                elif run_type=='instrumented':
+                    d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
                     d_size=""
-                           
-#            if mode == 'run_type':
-#                if node not in results.keys():
-#                    results[node]={}
-#                if num_nodes not in results[node].keys():
-#                    results[node][num_nodes]={}
-#                if run_type not in results[node][num_nodes].keys():
-#                    results[node][num_nodes][run_type]={}
-#                config=batch+'-'+length+'-'+k_out+'-'+k_length
-#                if config not in results[node][num_nodes][run_type][config].keys():
-#                    results[node][num_nodes][run_type][config]={'time':max(d_time), 'size':d_size}
-#                    configs.append(config)
-#            else:      
-            if node not in results.keys():
-                results[node]={}
-            if num_nodes not in results[node].keys():
-                results[node][num_nodes]={}
-            config=batch+'-'+length+'-'+k_out+'-'+k_length
-            if config not in results[node][num_nodes].keys():
-                results[node][num_nodes][config]={}
-                configs.append(config)
-            if run_type not in results[node][num_nodes][config].keys():
-                results[node][num_nodes][config][run_type]={'time':max(d_time), 'size':d_size}
+                else:
+                    d_size=data[-1].replace('(','[').replace(')',']').split('[')[1].split(']')[0].replace(' ','')
+    
+                    d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
+                    if run_type=='physl' or run_type=='cpp':
+                        (node, run_type, batch, length, k_length, k_out, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')                    
+                num_nodes=int(num_nodes)
+
+                if node not in results.keys():
+                    results[node]={}
+                if num_nodes not in results[node].keys():
+                    results[node][num_nodes]={}
+                config=batch+'-'+length+'-'+k_out+'-'+k_length
+                if config not in results[node][num_nodes].keys():
+                    results[node][num_nodes][config]={}
+                    configs.append(config)
+                if directory not in results[node][num_nodes][config].keys():
+                    results[node][num_nodes][config][directory]={'time':max(d_time), 'size':d_size}
     return results
 
 #comparison of different runs pytorch and physl            
@@ -103,10 +93,9 @@ def plot_all(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
 
 
 #comparison of different runs different nodes   
-def plot_num_nodes(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots',mode='speedup'):
+def plot_num_nodes(results, run_types, plot_dir='/home/shahrzad/repos/phylanx_dist/plots',mode='speedup'):
     j=1
     for node in results.keys():    
-        run_types=['cpp','impl','pytorch']
         num_nodes=[k for k in results[node].keys()]
         num_nodes.sort()
         configs=[k for k in results[node][1].keys()]
@@ -133,13 +122,11 @@ def plot_num_nodes(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots',m
                 
         
 #effect of batch size   
-def plot_batch(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
+def plot_batch(results,run_types, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
     j=1
-    run_types=['cpp','impl','pytorch']
 
     for node in results.keys():    
         num_nodes=[k for k in results[node].keys()]
-        num_nodes=[1]
         configs=[k for k in results[node][1].keys()]
         num_nodes.sort()
         configs.sort()
@@ -152,7 +139,7 @@ def plot_batch(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
                 p1_batches=[c for c in results[node][no].keys() if c.endswith('-'+nbatch)]
                 if len(p1_batches)>0:
                     p1_batches=sorted(p1_batches, key=lambda x: int("".join([i for i in x if i.isdigit()])))
-        
+ 
                     plt.figure(j)                 
                     for run_type in run_types: 
                         p1s=[p1 for p1 in p1_batches if run_type in results[node][no][p1].keys()]
@@ -265,51 +252,63 @@ def plot_f_out(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
 def read_one_node(dirs):
     one_dir='/home/shahrzad/repos/phylanx_dist/data/results_one_node/'
 
-    data_files=[]
+    data_files={}
     for directory in dirs:
-        [data_files.append(data_file) for data_file in glob.glob(one_dir+directory+'/*.dat')]
+        data_files[directory]=[]
+        for filename in glob.glob(one_dir+directory+'/*.dat'):
+            data_files[directory].append(filename)
         
     configs=[]
     results={}
     
-    for filename in data_files:
-        (node, run_type, batch, length, k_length, k_out, num_nodes, num_cores) = filename.split('/')[-1].replace('.dat','').split('_')    
-        num_nodes=int(num_nodes)
-        num_cores=int(num_cores)
-        f=open(filename, 'r')
-        data=f.readlines()
-        if len(data)>0:
-            if run_type=='pytorch':
-                d_time=[float(data[0].replace('\n',''))]
-                d_size=data[1].split('[')[1].split('])\n')[0].replace(' ','')
-            else:
-                d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
-                if run_type=='physl' and len(data)>num_nodes:
-                    d_size=data[-1].split('(')[1].split(')\n')[0].replace(' ','')
-                    (node, run_type, batch, length, k_length, k_out, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')                    
-                elif run_type=='impl':
-                    d_size=data[-1].split('[')[1].split(']\n')[0].replace(' ','')
-                elif run_type=='cpp':
-                    d_size=data[-1].split('(')[1].split(')\n')[0].replace(' ','')
-                    (node, run_type, batch, length, k_length, k_out, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')                                
-                else:
-                    d_size=""           
-                            
-            if node not in results.keys():
-                results[node]={}
-            if num_nodes not in results[node].keys():
-                results[node][num_nodes]={}
-            config=batch+'-'+length+'-'+k_length+'-'+k_out
-            if config not in results[node][num_nodes].keys():
-                results[node][num_nodes][config]={}
-                configs.append(config)
-            if run_type not in results[node][num_nodes][config].keys():
-                results[node][num_nodes][config][run_type]={}
-            if num_cores not in results[node][num_nodes][config][run_type].keys():
-                results[node][num_nodes][config][run_type][num_cores]={'time':max(d_time), 'size':d_size}
+    for directory in data_files.keys():
+        for filename in data_files[directory]:
+            (node, run_type, batch, length, k_out, k_length, num_nodes, num_cores) = filename.split('/')[-1].replace('.dat','').split('_')    
+    
+            f=open(filename, 'r')
+            data=f.readlines()
+            
+            if len(data)>0:            
+                if run_type=='pytorch':
+                    d_time=[float(data[0].replace('\n',''))]
+                    d_size=data[-1].split('[')[1].split(']')[0].replace(' ','')
+                    (node, run_type, batch, length, k_length, k_out, num_nodes, num_cores) = filename.split('/')[-1].replace('.dat','').split('_')    
+    
+                elif run_type=='instrumented':
+                    d_size=""
+                    (node, run_type, batch, length, k_length, k_out, num_nodes, num_cores) = filename.split('/')[-1].replace('.dat','').split('_')                                    
+                    d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
+
+                elif run_type=="impl":
+                    d_size=data[-1].replace('(','[').replace(')',']').split('[')[1].split(']')[0].replace(' ','')
+                    d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
+                    (node, run_type, batch, length, k_out, k_length, num_nodes, num_cores) = filename.split('/')[-1].replace('.dat','').split('_')    
+    
+                elif run_type=='physl' or run_type=='cpp':
+                    (node, run_type, batch, length, k_length, k_out, num_nodes, num_cores) = filename.split('/')[-1].replace('.dat','').split('_')                    
+                    splits=data[-1].split('[')[1].split(']')[0].replace(' ','').split(',')
+                    d_size=splits[0]+','+splits[2]+','+splits[1]
+                    d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
+
+                    
+                num_nodes=int(num_nodes)
+                num_cores=int(num_cores)  
+                
+                if node not in results.keys():
+                    results[node]={}
+                if num_nodes not in results[node].keys():
+                    results[node][num_nodes]={}
+                config=batch+'-'+length+'-'+k_length+'-'+k_out
+                if config not in results[node][num_nodes].keys():
+                    results[node][num_nodes][config]={}
+                    configs.append(config)
+                if directory not in results[node][num_nodes][config].keys():
+                    results[node][num_nodes][config][directory]={}
+                if num_cores not in results[node][num_nodes][config][directory].keys():
+                    results[node][num_nodes][config][directory][num_cores]={'time':max(d_time), 'size':d_size}
     return results
 
-def plot_one_node_speedup(results_one_node, plot_dir='/home/shahrzad/repos/phylanx_dist/plots',run_types=['cpp','impl','pytorch']):
+def plot_one_node_speedup(results_one_node,run_types, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
     j=1
     for node in results_one_node.keys():    
         num_nodes=[k for k in results_one_node[node].keys()]
@@ -324,7 +323,7 @@ def plot_one_node_speedup(results_one_node, plot_dir='/home/shahrzad/repos/phyla
                 num_cores.sort()
                 plt.scatter(num_cores, [results_one_node[node][1][config][run_type][1]['time']/results_one_node[node][1][config][run_type][k]['time'] for k in num_cores], marker='.', label=run_type)
                           
-            plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+                plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
             plt.title("run on "+node+" 1 node "+config)
             plt.xlabel('num_cores')
             plt.ylabel('speed-up')
@@ -332,7 +331,7 @@ def plot_one_node_speedup(results_one_node, plot_dir='/home/shahrzad/repos/phyla
             plt.close()
             j=j+1
 
-def plot_one_node_time(results_one_node, plot_dir='/home/shahrzad/repos/phylanx_dist/plots', run_types=['cpp','instrumented','impl','pytorch']):
+def plot_one_node_time(results_one_node, run_types, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
     j=1
     for node in results_one_node.keys():            
         num_nodes=[k for k in results_one_node[node].keys()]
