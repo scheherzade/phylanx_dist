@@ -41,8 +41,11 @@ def read_files(dirs, mode='config'):
                 if run_type=='physl' and len(data)>num_nodes:
                     d_size=data[-1].split('(')[1].split(')\n')[0].replace(' ','')
                     (node, run_type, batch, length, k_length, k_out, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')                    
-                elif run_type=='impl' or run_type=='pytorch':
+                elif run_type=='impl':
                     d_size=data[-1].split('[')[1].split(']\n')[0].replace(' ','')
+                elif run_type=='cpp':
+                    d_size=data[-1].split('(')[1].split(')\n')[0].replace(' ','')
+                    (node, run_type, batch, length, k_length, k_out, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')                                
                 else:
                     d_size=""
                            
@@ -259,13 +262,18 @@ def plot_f_out(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
                     j=j+1
                     
                     
-def read_one_node(directory='/home/shahrzad/repos/phylanx_dist/results_one_node'):
-    data_files=glob.glob(directory+'/*.dat')
+def read_one_node(dirs):
+    one_dir='/home/shahrzad/repos/phylanx_dist/data/results_one_node/'
+
+    data_files=[]
+    for directory in dirs:
+        [data_files.append(data_file) for data_file in glob.glob(one_dir+directory+'/*.dat')]
+        
     configs=[]
     results={}
     
     for filename in data_files:
-        (node, run_type, batch, length, k_length, k_out, num_nodes,num_cores) = filename.split('/')[-1].replace('.dat','').split('_')    
+        (node, run_type, batch, length, k_length, k_out, num_nodes, num_cores) = filename.split('/')[-1].replace('.dat','').split('_')    
         num_nodes=int(num_nodes)
         num_cores=int(num_cores)
         f=open(filename, 'r')
@@ -273,15 +281,19 @@ def read_one_node(directory='/home/shahrzad/repos/phylanx_dist/results_one_node'
         if len(data)>0:
             if run_type=='pytorch':
                 d_time=[float(data[0].replace('\n',''))]
-                d_size=data[1].split('[')[1].split('])\n')[0].split(',')
+                d_size=data[1].split('[')[1].split('])\n')[0].replace(' ','')
             else:
                 d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
                 if run_type=='physl' and len(data)>num_nodes:
-                    d_size=data[-1].split('(')[1].split(')\n')[0].split(',')
-                elif run_type=='impl' or run_type=='pytorch':
-                    d_size=data[-1].split('[')[1].split(']\n')[0].split(',')
+                    d_size=data[-1].split('(')[1].split(')\n')[0].replace(' ','')
+                    (node, run_type, batch, length, k_length, k_out, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')                    
+                elif run_type=='impl':
+                    d_size=data[-1].split('[')[1].split(']\n')[0].replace(' ','')
+                elif run_type=='cpp':
+                    d_size=data[-1].split('(')[1].split(')\n')[0].replace(' ','')
+                    (node, run_type, batch, length, k_length, k_out, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')                                
                 else:
-                    d_size=""
+                    d_size=""           
                             
             if node not in results.keys():
                 results[node]={}
@@ -320,7 +332,7 @@ def plot_one_node_speedup(results_one_node, plot_dir='/home/shahrzad/repos/phyla
             plt.close()
             j=j+1
 
-def plot_one_node_time(results_one_node, plot_dir='/home/shahrzad/repos/phylanx_dist/plots', run_types=['cpp','impl','pytorch']):
+def plot_one_node_time(results_one_node, plot_dir='/home/shahrzad/repos/phylanx_dist/plots', run_types=['cpp','instrumented','impl','pytorch']):
     j=1
     for node in results_one_node.keys():            
         num_nodes=[k for k in results_one_node[node].keys()]
