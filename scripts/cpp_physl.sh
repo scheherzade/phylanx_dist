@@ -55,8 +55,8 @@ do
 					echo "input ${i1}x${i2}x3 filter ${f1}x${f2}x3"
                                         if [ ${cpp} -eq 1 ]
 					then
-						touch ${result_dir}/${node_name}_instrumented_${i1}_${i2}_${f1}_${f2}_${num_nodes}.dat
-						rm ${result_dir}/${node_name}_instrumented_${i1}_${i2}_${f1}_${f2}_${num_nodes}.dat
+						touch ${result_dir}/${node_name}_cpp_${i1}_${i2}_${f1}_${f2}_${num_nodes}.dat
+						rm ${result_dir}/${node_name}_cpp_${i1}_${i2}_${f1}_${f2}_${num_nodes}.dat
 						srun -p ${node_name} -N ${num_nodes} ${phylanx_bin_dir}/conv1d_dist_instrumented_test --batch=${i1} --length=${i2} --channel=3 --filter_length=${f1} --out_channels=${f2} --hpx:localities=${num_nodes}>>${result_dir}/${node_name}_cpp_${i1}_${i2}_${f1}_${f2}_${num_nodes}.dat
 					fi
 					if [ ${physl} -eq 1 ]
