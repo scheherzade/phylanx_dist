@@ -16,18 +16,18 @@ cpp_dir='/home/shahrzad/repos/phylanx_dist/data/phylanx_master'
 impl_dir='/home/shahrzad/repos/phylanx_dist/data/phylanx_impl'
 pytorch_dir='/home/shahrzad/repos/phylanx_dist/data/pytorch_rerun'
 
-dirs=[cpp_dir, impl_dir, pytorch_dir]
+dirs=['master', 'impl', 'pytorch_rerun','bita_modified']
 results=dp.read_files(dirs)
 
 dp.validate_output_size(results)
 
-dp.plot_num_nodes(results,mode='time')
-dp.plot_batch(results)
+dp.plot_num_nodes(results,dirs,mode='speedup')
+dp.plot_batch(results,dirs)
 dp.plot_length(results)
 dp.plot_f_length(results)
 dp.plot_f_out(results)
 
-dirs=['impl','instrumented','pytorch_rerun','bita_modified']
+dirs=['bita_modified']
 results_one_node=dp.read_one_node(dirs)
 for node in results_one_node.keys():
     for num_nodes in results_one_node[node].keys():
