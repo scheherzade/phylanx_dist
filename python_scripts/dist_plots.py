@@ -19,7 +19,7 @@ import glob
 import numpy as np
 import matplotlib.pyplot as plt
 
-def read_files(dirs):
+def read_files(dirs, mode='dirs'):
     ref_dir='/home/shahrzad/repos/phylanx_dist/data/'
     data_files={}
     for directory in dirs:
@@ -31,36 +31,48 @@ def read_files(dirs):
     results={}
     
     for directory in data_files.keys():
-        for filename in data_files[directory]:
-            (node, run_type, batch, length, k_out, k_length, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')    
+        for filename in data_files[directory]:     
+            (node, run_type, batch, length, channels_out, filter_length, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')    
+            output_size=[int(batch), int(channels_out), int(length)-int(filter_length)+1]
 
             f=open(filename, 'r')
             data=f.readlines()
-            if len(data)>0:            
+            if len(data)>0:                
+                d_size=[d.split('[')[1].split(']')[0].replace(' ','') for d in data if '[' in d ]              
+    
+                sizes_0=[int(d.split(',')[0]) for d in d_size]
+                sizes_1=[int(d.split(',')[1]) for d in d_size]
+                sizes_2=[int(d.split(',')[2]) for d in d_size]
+                
+                if (sum(sizes_0) != output_size[0]) or ((sum(sizes_1)/len(sizes_1)) != output_size[1]) or ((sum(sizes_2)/len(sizes_2)) != output_size[2]):
+                    print("size_mistmatch", filename, d_size, output_size)
+                    return 
+                
                 if run_type=='pytorch':
                     d_time=[float(data[0].replace('\n',''))]
-                    d_size=data[-1].split('[')[1].split(']')[0].replace(' ','')
-                elif run_type=='instrumented':
-                    d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
-                    d_size=""
                 else:
-                    d_size=data[-1].replace('(','[').replace(')',']').split('[')[1].split(']')[0].replace(' ','')
-    
                     d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
-                    if run_type=='physl' or run_type=='cpp':
-                        (node, run_type, batch, length, k_length, k_out, num_nodes) = filename.split('/')[-1].replace('.dat','').split('_')                    
+                                  
                 num_nodes=int(num_nodes)
-
+    
                 if node not in results.keys():
                     results[node]={}
                 if num_nodes not in results[node].keys():
                     results[node][num_nodes]={}
-                config=batch+'-'+length+'-'+k_out+'-'+k_length
+                    
+                config=batch+'-'+length+'-'+channels_out+'-'+filter_length
+                
                 if config not in results[node][num_nodes].keys():
                     results[node][num_nodes][config]={}
                     configs.append(config)
-                if directory not in results[node][num_nodes][config].keys():
-                    results[node][num_nodes][config][directory]={'time':max(d_time), 'size':d_size}
+                    
+                if mode == 'dirs':
+                    if directory not in results[node][num_nodes][config].keys():
+                        results[node][num_nodes][config][directory]={'time':max(d_time), 'size':d_size}
+                elif mode == 'run_type':
+                    print(config,run_type)
+                    if run_type not in results[node][num_nodes][config].keys():
+                        results[node][num_nodes][config][run_type]={'time':max(d_time), 'size':d_size}
     return results
 
 #comparison of different runs pytorch and physl            
@@ -250,7 +262,7 @@ def plot_f_out(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
                     
                     
 def read_one_node(dirs):
-    one_dir='/home/shahrzad/repos/phylanx_dist/data/results_one_node/'
+    one_dir='/home/shahrzad/repos/phylanx_dist/data/'
 
     data_files={}
     for directory in dirs:
@@ -263,49 +275,50 @@ def read_one_node(dirs):
     
     for directory in data_files.keys():
         for filename in data_files[directory]:
-            (node, run_type, batch, length, k_out, k_length, num_nodes, num_cores) = filename.split('/')[-1].replace('.dat','').split('_')    
-    
+            (node, run_type, batch, length, channels_out, filter_length, num_nodes, num_cores) = filename.split('/')[-1].replace('.dat','').split('_')        
+            output_size=[int(batch), int(channels_out), int(length)-int(filter_length)+1]
+
             f=open(filename, 'r')
             data=f.readlines()
-            
-            if len(data)>0:            
+            if len(data)>0:                
+                d_size=[d.split('[')[1].split(']')[0].replace(' ','') for d in data if '[' in d ]              
+    
+                sizes_0=[int(d.split(',')[0]) for d in d_size]
+                sizes_1=[int(d.split(',')[1]) for d in d_size]
+                sizes_2=[int(d.split(',')[2]) for d in d_size]
+                
+                if (sum(sizes_0) != output_size[0]) or ((sum(sizes_1)/len(sizes_1)) != output_size[1]) or ((sum(sizes_2)/len(sizes_2)) != output_size[2]):
+                    print("size_mistmatch", filename, d_size, output_size)
+                    return 
+                
                 if run_type=='pytorch':
                     d_time=[float(data[0].replace('\n',''))]
-                    d_size=data[-1].split('[')[1].split(']')[0].replace(' ','')
-                    (node, run_type, batch, length, k_length, k_out, num_nodes, num_cores) = filename.split('/')[-1].replace('.dat','').split('_')    
-    
-                elif run_type=='instrumented':
-                    d_size=""
-                    (node, run_type, batch, length, k_length, k_out, num_nodes, num_cores) = filename.split('/')[-1].replace('.dat','').split('_')                                    
+                else:
                     d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
-
-                elif run_type=="impl":
-                    d_size=data[-1].replace('(','[').replace(')',']').split('[')[1].split(']')[0].replace(' ','')
-                    d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
-                    (node, run_type, batch, length, k_out, k_length, num_nodes, num_cores) = filename.split('/')[-1].replace('.dat','').split('_')    
-    
-                elif run_type=='physl' or run_type=='cpp':
-                    (node, run_type, batch, length, k_length, k_out, num_nodes, num_cores) = filename.split('/')[-1].replace('.dat','').split('_')                    
-                    splits=data[-1].split('[')[1].split(']')[0].replace(' ','').split(',')
-                    d_size=splits[0]+','+splits[2]+','+splits[1]
-                    d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
-
-                    
-                num_nodes=int(num_nodes)
+                                  
+                num_nodes=int(num_nodes)            
                 num_cores=int(num_cores)  
                 
                 if node not in results.keys():
                     results[node]={}
                 if num_nodes not in results[node].keys():
                     results[node][num_nodes]={}
-                config=batch+'-'+length+'-'+k_length+'-'+k_out
+                config=batch+'-'+length+'-'+filter_length+'-'+channels_out
                 if config not in results[node][num_nodes].keys():
                     results[node][num_nodes][config]={}
                     configs.append(config)
-                if directory not in results[node][num_nodes][config].keys():
-                    results[node][num_nodes][config][directory]={}
-                if num_cores not in results[node][num_nodes][config][directory].keys():
-                    results[node][num_nodes][config][directory][num_cores]={'time':max(d_time), 'size':d_size}
+#                
+#                if mode=='dirs':
+#                    if directory not in results[node][num_nodes][config].keys():
+#                        results[node][num_nodes][config][directory]={}
+#                    if num_cores not in results[node][num_nodes][config][directory].keys():
+#                        results[node][num_nodes][config][directory][num_cores]={'time':max(d_time), 'size':d_size}
+#                elif mode=='run_type':
+                if run_type not in results[node][num_nodes][config].keys():
+                    results[node][num_nodes][config][run_type]={}
+                if num_cores not in results[node][num_nodes][config][run_type].keys():
+                    results[node][num_nodes][config][run_type][num_cores]={'time':max(d_time), 'size':d_size}
+                        
     return results
 
 def plot_one_node_speedup(results_one_node,run_types, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
@@ -327,7 +340,7 @@ def plot_one_node_speedup(results_one_node,run_types, plot_dir='/home/shahrzad/r
             plt.title("run on "+node+" 1 node "+config)
             plt.xlabel('num_cores')
             plt.ylabel('speed-up')
-            plt.savefig(plot_dir+'/one_node/'+node+'_'+config+'_speedup.png',bbox_inches='tight')
+            plt.savefig(plot_dir+'/one_node/speedup/'+node+'_'+config+'_speedup.png',bbox_inches='tight')
             plt.close()
             j=j+1
 
@@ -350,7 +363,7 @@ def plot_one_node_time(results_one_node, run_types, plot_dir='/home/shahrzad/rep
             plt.title("run on "+node+" 1 node "+config)
             plt.xlabel('num_cores')
             plt.ylabel('time')
-            plt.savefig(plot_dir+'/one_node/'+node+'_'+config+'_time.png',bbox_inches='tight')
+            plt.savefig(plot_dir+'/one_node/time/'+node+'_'+config+'_time.png',bbox_inches='tight')
             plt.close()
             j=j+1
 

@@ -12,6 +12,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 import dist_plots as dp
 
+
+dirs=['all_modes','pytorch']
+modes=['shahrzad','bita','master','pytorch']
+results=dp.read_files(dirs,mode='run_type')
+
+dp.plot_num_nodes(results,dirs,mode='speedup')
+dp.plot_num_nodes(results,dirs,mode='time')
+dp.plot_batch(results,modes)
+
+
+
+
+
+
+
+
+
 cpp_dir='/home/shahrzad/repos/phylanx_dist/data/phylanx_master'
 impl_dir='/home/shahrzad/repos/phylanx_dist/data/phylanx_impl'
 pytorch_dir='/home/shahrzad/repos/phylanx_dist/data/pytorch_rerun'
