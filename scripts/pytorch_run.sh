@@ -12,12 +12,12 @@ script_dir="/work/sshirzad/phylanx_dist/scripts"
 result_dir="/work/sshirzad/phylanx_dist/results"
 
 batch=(10 100 1000 10000 100000)
-length=(10 100 1000)
-out_channels=(5 10)
-filter_length=(5 10 100)
+length=(10 100 1000 5000)
+out_channels=(100 500)
+filter_length=(5 10 20)
 
 
-#rm  ${result_dir}/*.dat
+rm  ${result_dir}/*.dat
 
 for b in ${batch[@]}
 do
