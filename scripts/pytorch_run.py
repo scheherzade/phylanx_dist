@@ -16,22 +16,23 @@ args = parser.parse_args()
 
 batch = args.integers[0]
 length = args.integers[1]
-kernel_size = args.integers[3]
 out_channels = args.integers[2]
+kernel_size = args.integers[3]
 
 import torch.distributed as dist
 import torch.nn.parallel as par  
 import torch.nn as nn
 import torch
 import time
+import numpy as np
 
 #torch.set_num_threads(40)
-
-array = torch.rand(batch, 3, length)
+a=np.random.rand(batch, 3, length)
+array = torch.tensor(a).float()
 conv1 = nn.Conv1d(in_channels=3,out_channels=out_channels, kernel_size=kernel_size, bias=False)
 
 t_start = time.time()
-out = conv1(array)
+out = conv1(array).double()
 t_end = time.time()
 t = t_end-t_start 
 print(t)
