@@ -13,9 +13,12 @@ import matplotlib.pyplot as plt
 import dist_plots as dp
 
 
-dirs=['all_modes','pytorch']
-modes=['shahrzad','bita','master','pytorch']
-results=dp.read_files(dirs,mode='run_type')
+dirs=['all_modes','pytorch','pytorch_allocate']
+alias=['shahrzad','bita','master','pytorch','pytorch_alloc']
+#results=dp.read_files(dirs,mode='dirs')
+
+modes=['shahrzad','bita','master','pytorch','pytorch-alloc']
+results=dp.read_files(dirs,modes,mode='run_type')
 
 dp.plot_num_nodes(results,dirs,mode='speedup')
 dp.plot_num_nodes(results,dirs,mode='time')

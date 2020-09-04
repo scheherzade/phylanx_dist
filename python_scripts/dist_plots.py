@@ -19,13 +19,20 @@ import glob
 import numpy as np
 import matplotlib.pyplot as plt
 
-def read_files(dirs, mode='dirs'):
+def read_files(dirs, alias=None, mode='dirs'):
+    
+    if alias is None:
+        alias=dirs
+    if len(set(alias))!=len(alias):
+        print("repeated name in alias or size mismatch")
+        return
+    
     ref_dir='/home/shahrzad/repos/phylanx_dist/data/'
     data_files={}
-    for directory in dirs:
-        data_files[directory]=[]
-        for filename in glob.glob(ref_dir+directory+'/*.dat'):
-            data_files[directory].append(filename)
+    for i in range(len(dirs)):
+        data_files[alias[i]]=[]
+        for filename in glob.glob(ref_dir+dirs[i]+'/*.dat'):
+            data_files[alias[i]].append(filename)
         
     configs=[]
     results={}
@@ -37,42 +44,44 @@ def read_files(dirs, mode='dirs'):
 
             f=open(filename, 'r')
             data=f.readlines()
-            if len(data)>0:                
+            if len(data)>0:  
+                num_nodes=int(num_nodes)
+
                 d_size=[d.split('[')[1].split(']')[0].replace(' ','') for d in data if '[' in d ]              
     
                 sizes_0=[int(d.split(',')[0]) for d in d_size]
                 sizes_1=[int(d.split(',')[1]) for d in d_size]
                 sizes_2=[int(d.split(',')[2]) for d in d_size]
                 
-                if (sum(sizes_0) != output_size[0]) or ((sum(sizes_1)/len(sizes_1)) != output_size[1]) or ((sum(sizes_2)/len(sizes_2)) != output_size[2]):
+                if len(d_size)<num_nodes:
+                    print("run did not complete for ", filename.split('/')[-1].replace('.dat',''))
+                elif (sum(sizes_0) != output_size[0]) or ((sum(sizes_1)/len(sizes_1)) != output_size[1]) or ((sum(sizes_2)/len(sizes_2)) != output_size[2]):
                     print("size_mistmatch", filename, d_size, output_size)
-                    return 
+                else:    
                 
-                if run_type=='pytorch':
-                    d_time=[float(data[0].replace('\n',''))]
-                else:
-                    d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
-                                  
-                num_nodes=int(num_nodes)
-    
-                if node not in results.keys():
-                    results[node]={}
-                if num_nodes not in results[node].keys():
-                    results[node][num_nodes]={}
+                    if 'pytorch' in run_type:
+                        d_time=[float(data[0].replace('\n',''))]
+                    else:
+                        d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
+                                      
+        
+                    if node not in results.keys():
+                        results[node]={}
+                    if num_nodes not in results[node].keys():
+                        results[node][num_nodes]={}
+                        
+                    config=batch+'-'+length+'-'+channels_out+'-'+filter_length
                     
-                config=batch+'-'+length+'-'+channels_out+'-'+filter_length
-                
-                if config not in results[node][num_nodes].keys():
-                    results[node][num_nodes][config]={}
-                    configs.append(config)
-                    
-                if mode == 'dirs':
-                    if directory not in results[node][num_nodes][config].keys():
-                        results[node][num_nodes][config][directory]={'time':max(d_time), 'size':d_size}
-                elif mode == 'run_type':
-                    print(config,run_type)
-                    if run_type not in results[node][num_nodes][config].keys():
-                        results[node][num_nodes][config][run_type]={'time':max(d_time), 'size':d_size}
+                    if config not in results[node][num_nodes].keys():
+                        results[node][num_nodes][config]={}
+                        configs.append(config)
+                        
+                    if mode == 'dirs':
+                        if directory not in results[node][num_nodes][config].keys():
+                            results[node][num_nodes][config][directory]={'time':max(d_time), 'size':d_size}
+                    elif mode == 'run_type':
+                        if run_type not in results[node][num_nodes][config].keys():
+                            results[node][num_nodes][config][run_type]={'time':max(d_time), 'size':d_size}
     return results
 
 #comparison of different runs pytorch and physl            
