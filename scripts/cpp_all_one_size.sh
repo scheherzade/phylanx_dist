@@ -11,10 +11,10 @@ script_dir="/work/sshirzad/phylanx_dist/scripts"
 result_dir="/work/sshirzad/phylanx_dist/results"
 phylanx_bin_dir="/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin"
 
-batch=(10 100 1000 10000 100000)
-length=(10 100 1000 5000)
+batch=(100000)
+length=(500)
 out_channels=(100)
-filter_length=(5 10 20)
+filter_length=(20)
 
 modes=("master" "shahrzad" "bita")
 export PATH=${phylanx_bin_dir}:$PATH

@@ -1,0 +1,74 @@
+-- The C compiler identification is Clang 10.0.0
+-- The CXX compiler identification is Clang 10.0.0
+-- Check for working C compiler: /opt/apps/clang/10.0.0/bin/clang
+-- Check for working C compiler: /opt/apps/clang/10.0.0/bin/clang -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /opt/apps/clang/10.0.0/bin/clang++
+-- Check for working CXX compiler: /opt/apps/clang/10.0.0/bin/clang++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- CMake version:  3.16.4
+-- Phylanx version:  0.0.1
+-- Performing Test PHYLANX_WITH_CXX17_SHARED_PTR_ARRAY - Failed
+-- Found TCMalloc: /usr/lib64/libtcmalloc_minimal.so  
+-- Using tcmalloc allocator.
+-- Found Boost: /opt/apps/clang10/boost/1.73.0/release (found suitable version "1.73.0", minimum required is "1.61")  
+-- Found Boost: /opt/apps/clang10/boost/1.73.0/release (found suitable version "1.73.0", minimum required is "1.61") found components: filesystem 
+-- Found Boost: /opt/apps/clang10/boost/1.73.0/release (found suitable version "1.73.0", minimum required is "1.61") found components: program_options 
+-- Found Hwloc: /opt/apps/hwloc/2.2.0/lib/libhwloc.so  
+-- HPX version:  1.5.0 (ca7d5e8aad) using C++14
+-- Performing Test PHYLANX_WITH_CXX_FLAG_FDIAGNOSTICS_SHOW_OPTION
+-- Performing Test PHYLANX_WITH_CXX_FLAG_FDIAGNOSTICS_SHOW_OPTION - Success
+-- Performing Test PHYLANX_WITH_C_FLAG_FDIAGNOSTICS_SHOW_OPTION
+-- Performing Test PHYLANX_WITH_C_FLAG_FDIAGNOSTICS_SHOW_OPTION - Success
+-- Performing Test PHYLANX_WITH_Fortran_FLAG_FDIAGNOSTICS_SHOW_OPTION
+-- Performing Test PHYLANX_WITH_Fortran_FLAG_FDIAGNOSTICS_SHOW_OPTION - Success
+-- Performing Test PHYLANX_WITH_CXX_FLAG_WERROR_VLA
+-- Performing Test PHYLANX_WITH_CXX_FLAG_WERROR_VLA - Success
+-- Performing Test PHYLANX_WITH_CXX_FLAG_WERROR_RETURN_TYPE
+-- Performing Test PHYLANX_WITH_CXX_FLAG_WERROR_RETURN_TYPE - Success
+-- Performing Test PHYLANX_WITH_C_FLAG_WERROR_RETURN_TYPE
+-- Performing Test PHYLANX_WITH_C_FLAG_WERROR_RETURN_TYPE - Success
+-- Performing Test PHYLANX_WITH_CXX_FLAG_WNO_SYNC_NAND
+-- Performing Test PHYLANX_WITH_CXX_FLAG_WNO_SYNC_NAND - Failed
+-- "-Wno-sync-nand" not available for language CXX.
+-- Performing Test PHYLANX_WITH_C_FLAG_WNO_SYNC_NAND
+-- Performing Test PHYLANX_WITH_C_FLAG_WNO_SYNC_NAND - Failed
+-- "-Wno-sync-nand" not available for language C.
+-- Performing Test WITH_LINKER_FLAG_WL__Z_DEFS
+-- Performing Test WITH_LINKER_FLAG_WL__Z_DEFS - Success
+-- Performing Test PHYLANX_WITH_CXX_FLAG_WNO_CAST_ALIGN
+-- Performing Test PHYLANX_WITH_CXX_FLAG_WNO_CAST_ALIGN - Success
+-- C++ mode enforced: C++14
+-- Looking for sgemm_
+-- Looking for sgemm_ - not found
+-- Found Threads: TRUE  
+-- Looking for sgemm_
+-- Looking for sgemm_ - found
+-- Found BLAS: /usr/lib64/libopenblas.so  
+-- Looking for cheev_
+-- Looking for cheev_ - found
+-- A library with LAPACK API found.
+-- Found blaze
+-- Blaze version:  3.8
+-- Found BlazeTensor
+-- BlazeTensor version:  0.1
+-- Used C++ flags for pybind11:  -std=c++14
+-- Found PythonInterp: /usr/bin/python3.8 (found version "3.8") 
+-- Found PythonLibs: python3.8
+-- Python library version:  3.8
+-- Python executable:  /usr/bin/python3.8
+-- Python libraries:  python3.8
+-- Pybind11 library version:  2.5.0
+-- Found Git: /usr/bin/git (found version "2.18.4") 
+-- GIT commit is 0897582e12d6ef6adb800eca6958148d23df4338.
+-- phylanx_get_python_extension_location: .cpython-38-x86_64-linux-gnu.so -> /home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/python/build/lib.linux-x86_64-3.8
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa
+Running on 
