@@ -12,7 +12,8 @@ result_dir="/work/sshirzad/phylanx_dist/results"
 phylanx_bin_dir="/home/sshirzad/src/phylanx/build_release_clang_no_hpxmp_medusa/bin"
 
 batch=(100000)
-length=(500)
+length=(200)
+in_channels=32
 out_channels=(100)
 filter_length=(20)
 
@@ -41,11 +42,11 @@ do
 	  					        for r in {1..6}
 	                                                do
 
-                                                		echo "mode ${mode} input ${b}x${l}x3 filter ${oc}x${fl}x3 ${r} run"
+                                                		echo "mode ${mode} input ${b}x${l}x${in_channels} filter ${oc}x${fl}x${in_channels} ${r} run"
 
-	                                    	    touch ${result_dir}/${node_name}_${mode}_${b}_${l}_${oc}_${fl}_${num_nodes}_${num_cores}_${r}.dat
-	                                        	rm ${result_dir}/${node_name}_${mode}_${b}_${l}_${oc}_${fl}_${num_nodes}_${num_cores}_${r}.dat
-	                                        	srun -p ${node_name} -N ${num_nodes} ${phylanx_bin_dir}/conv1d_dist_instrumented_test --batch=${b} --length=${l} --channel=3 --filter_length=${fl} --out_channels=${oc} --mode=${mode} --hpx:localities=${num_nodes} --hpx:threads=${num_cores} --hpx:run-hpx-main >>${result_dir}/${node_name}_${mode}_${b}_${l}_${oc}_${fl}_${num_nodes}_${num_cores}_${r}.dat
+	                                    	    touch ${result_dir}/${node_name}_${mode}_${b}_${l}_${oc}_${fl}_${num_nodes}_${num_cores}_${r}_ch${in_channels}.dat
+	                                        	rm ${result_dir}/${node_name}_${mode}_${b}_${l}_${oc}_${fl}_${num_nodes}_${num_cores}_${r}_ch${in_channels}.dat
+	                                        	srun -p ${node_name} -N ${num_nodes} ${phylanx_bin_dir}/conv1d_dist_instrumented_test --batch=${b} --length=${l} --channel=${in_channels} --filter_length=${fl} --out_channels=${oc} --mode=${mode} --hpx:localities=${num_nodes} --hpx:threads=${num_cores} --hpx:run-hpx-main >>${result_dir}/${node_name}_${mode}_${b}_${l}_${oc}_${fl}_${num_nodes}_${num_cores}_${r}_ch${in_channels}.dat
 							done
 						done
 	                                done

@@ -12,11 +12,12 @@ script_dir="/work/sshirzad/phylanx_dist/scripts"
 result_dir="/work/sshirzad/phylanx_dist/results"
 
 batch=(100000)
-length=(500)
+length=(200)
+in_channels=32
 out_channels=(100)
 filter_length=(20)
 
-rm  ${result_dir}/*.dat
+#rm  ${result_dir}/*.dat
 
 for b in ${batch[@]}
 do
@@ -30,10 +31,10 @@ do
 	        	        do
 	           			for r in {1..6}
                                         do
-						echo "input ${b}x${l}x3 filter ${oc}x${fl}x3 ${r} run"
-						touch ${result_dir}/${node_name}_pytorch_${b}_${l}_${oc}_${fl}_${num_nodes}_${r}.dat
-						rm ${result_dir}/${node_name}_pytorch_${b}_${l}_${oc}_${fl}_${num_nodes}_${r}.dat
-                		                srun -p ${node_name} -N ${num_nodes}  python3 pytorch_run.py ${b} ${l} ${oc} ${fl} >>${result_dir}/${node_name}_pytorch_${b}_${l}_${oc}_${fl}_${num_nodes}_${r}.dat
+						echo "input ${b}x${l}x${in_channels} filter ${oc}x${fl}x${in_channels} ${r} run"
+						touch ${result_dir}/${node_name}_pytorch_${b}_${l}_${oc}_${fl}_${num_nodes}_${r}_ch${in_channels}.dat
+						rm ${result_dir}/${node_name}_pytorch_${b}_${l}_${oc}_${fl}_${num_nodes}_${r}_ch${in_channels}.dat
+                		                srun -p ${node_name} -N ${num_nodes}  python3 pytorch_run.py ${b} ${l} ${oc} ${fl} ${in_channels}>>${result_dir}/${node_name}_pytorch_${b}_${l}_${oc}_${fl}_${num_nodes}_${r}_ch${in_channels}.dat
 					done
 				done
 			fi
