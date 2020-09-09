@@ -84,34 +84,105 @@ def read_files(dirs, alias=None, mode='dirs'):
                             results[node][num_nodes][config][run_type]={'time':max(d_time), 'size':d_size}
     return results
 
-#comparison of different runs pytorch and physl            
-def plot_all(results, plot_dir='/home/shahrzad/repos/phylanx_dist/plots'):
-    j=1
-    for node in results.keys():     
-        for no in results[node].keys():
-            run_types=['instrumented','pytorch']
-            all_results=[]
-            plt.figure(j)
-            plt.axes([0, 0, 2, 1])
-            for config in results[node][no].keys():
-                rs=[]
-                for run_type in run_types:
-                    if run_type in results[node][no][config].keys():
-                        rs.append(results[node][no][config][run_type]['time'])
+def read_files_rep(dirs, alias=None, mode='dirs'):
+    
+    if alias is None:
+        alias=dirs
+    if len(set(alias))!=len(alias):
+        print("repeated name in alias or size mismatch")
+        return
+    
+    ref_dir='/home/shahrzad/repos/phylanx_dist/data/'
+    data_files={}
+    for i in range(len(dirs)):
+        data_files[alias[i]]=[]
+        for filename in glob.glob(ref_dir+dirs[i]+'/*.dat'):
+            data_files[alias[i]].append(filename)
+        
+    configs=[]
+    results={}
+    
+    for directory in data_files.keys():
+        for filename in data_files[directory]:     
+            (node, run_type, batch, length, channels_out, filter_length, num_nodes, rep) = filename.split('/')[-1].replace('.dat','').split('_')    
+            output_size=[int(batch), int(channels_out), int(length)-int(filter_length)+1]
+
+            f=open(filename, 'r')
+            data=f.readlines()
+            if len(data)>0:  
+                num_nodes=int(num_nodes)
+
+                d_size=[d.split('[')[1].split(']')[0].replace(' ','') for d in data if '[' in d ]              
+    
+                sizes_0=[int(d.split(',')[0]) for d in d_size]
+                sizes_1=[int(d.split(',')[1]) for d in d_size]
+                sizes_2=[int(d.split(',')[2]) for d in d_size]
+                
+                if len(d_size)<num_nodes:
+                    print("run did not complete for ", filename.split('/')[-1].replace('.dat',''))
+                elif (sum(sizes_0) != output_size[0]) or ((sum(sizes_1)/len(sizes_1)) != output_size[1]) or ((sum(sizes_2)/len(sizes_2)) != output_size[2]):
+                    print("size_mistmatch", filename, d_size, output_size)
+                else:    
+                
+                    if 'pytorch' in run_type:
+                        d_time=[float(data[0].replace('\n',''))]
                     else:
-                        rs.append(0)
-                    all_results.append(rs)            
+                        d_time=[float(d.split(': ')[1].split('\n')[0]) for d in data if ':' in d]        
+                                      
+        
+                    if node not in results.keys():
+                        results[node]={}
+                    if num_nodes not in results[node].keys():
+                        results[node][num_nodes]={}
+                        
+                    config=batch+'-'+length+'-'+channels_out+'-'+filter_length
                     
-            for run_type in run_types:     
-                results_r=[all_results[i][run_types.index(run_type)] for i in range(len(all_results)) if all_results[i][run_types.index(run_type)]!=0]
-                plt.scatter([i for i in range(len(results_r))], results_r,marker='.',label=run_type)
-           
+                    if config not in results[node][num_nodes].keys():
+                        results[node][num_nodes][config]={}
+                        configs.append(config)
+                        
+                    if mode == 'dirs':
+                        if directory not in results[node][num_nodes][config].keys():
+                            results[node][num_nodes][config][directory]={}
+                        results[node][num_nodes][config][directory][rep]={'time':max(d_time), 'size':d_size}                  
+                    elif mode == 'run_type':                    
+                        if run_type not in results[node][num_nodes][config].keys():
+                            results[node][num_nodes][config][run_type]={}
+                        results[node][num_nodes][config][run_type][rep]={'time':max(d_time), 'size':d_size}
+    return results
+
+
+def plot_num_nodes_rep(results, alias, plot_dir='/home/shahrzad/repos/phylanx_dist/plots',mode='speedup'):
+    j=1
+    for node in results.keys():    
+        num_nodes=[k for k in results[node].keys()]
+        num_nodes.sort()
+        configs=[k for k in results[node][1].keys()]
+        configs.sort()
+        
+        for config in configs:
+            plt.figure(j)                 
+            for run_type in alias:    
+                all_ks=[k for k in num_nodes if k in results[node].keys() and config in results[node][k] and run_type in results[node][k][config] and run_type in results[node][1][config]]
+                if mode=='speedup':
+                    plt.scatter(all_ks, [results[node][1][config][run_type]['time']/results[node][k][config][run_type]['time'] for k in all_ks], marker='.', label=run_type)
+                    plt.ylabel('speed-up')
+                else:
+                    sum_i=[0]*len(all_ks)
+                    for ak in range(len(all_ks)):
+                        for rep in range(2,7):
+                            sum_i[ak] += results[node][all_ks[ak]][config][run_type][str(rep)]['time']
+                    plt.scatter(all_ks, [s/5 for s in sum_i], marker='.', label=run_type)
+                    plt.ylabel('time')
+
+                          
             plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-            plt.title("run on "+node+" on "+str(no)+" nodes")
-            plt.savefig(plot_dir+'/all_configs/'+node+'_'+str(no)+'.png',bbox_inches='tight')
+            plt.title("run on "+node+" "+config)
+            plt.xlabel('num_nodes')
+            plt.savefig(plot_dir+'/based_on_num_nodes/'+mode+'/'+node+'_'+config+'.png',bbox_inches='tight')
             plt.close()
             j=j+1
-
+                
 
 #comparison of different runs different nodes   
 def plot_num_nodes(results, run_types, plot_dir='/home/shahrzad/repos/phylanx_dist/plots',mode='speedup'):
