@@ -19,13 +19,13 @@ import argparse
 import sys
 
 if not len(sys.argv) == 6 :
-    print("This program requires the following 4 arguments seperated by a space, channel is set to 3 by default ")
+    print("This program requires the following 5 arguments seperated by a space, channel is set to 3 by default ")
     print("batch length kernel_size out_channels")
     exit(-57)
 
 parser = argparse.ArgumentParser(description='Parameters')
 parser.add_argument('integers', type=int, nargs=5,
-                    help='batch, length, kernel_size, out_channels')
+                    help='batch, length, kernel_size, out_channels, num_process')
 
 
 args = parser.parse_args()
@@ -35,7 +35,7 @@ batch = args.integers[0]
 length = args.integers[1]
 kernel_size = args.integers[2]
 out_channels = args.integers[3]
-num_cores = args.integers[4]
+num_process = args.integers[4]
 
 def setup(rank, world_size):
     os.environ["CUDA_VISIBLE_DEVICES"]=""
@@ -86,5 +86,5 @@ def run_demo(demo_fn, world_size):
 
 if __name__ == "__main__":    
     t1=time.time()
-    run_demo(demo_basic, num_cores)
+    run_demo(demo_basic, num_process)
     print(time.time() - t1)
